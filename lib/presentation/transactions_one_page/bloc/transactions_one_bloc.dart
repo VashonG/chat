@@ -1,0 +1,8 @@
+import 'package:equatable/equatable.dart';import 'package:flutter/material.dart';import '/core/app_export.dart';import '../models/chipviewtop_up_item_model.dart';import '../models/usersubscriptio1_item_model.dart';import 'package:carat_card/presentation/transactions_one_page/models/transactions_one_model.dart';part 'transactions_one_event.dart';part 'transactions_one_state.dart';/// A bloc that manages the state of a TransactionsOne according to the event that is dispatched to it.
+class TransactionsOneBloc extends Bloc<TransactionsOneEvent, TransactionsOneState> {TransactionsOneBloc(TransactionsOneState initialState) : super(initialState) { on<TransactionsOneInitialEvent>(_onInitialize); on<UpdateChipViewEvent>(_updateChipView); }
+
+_onInitialize(TransactionsOneInitialEvent event, Emitter<TransactionsOneState> emit, ) async  { emit(state.copyWith(transactionsOneModelObj: state.transactionsOneModelObj?.copyWith(chipviewtopUpItemList: fillChipviewtopUpItemList(), usersubscriptio1ItemList: fillUsersubscriptio1ItemList()))); } 
+_updateChipView(UpdateChipViewEvent event, Emitter<TransactionsOneState> emit, ) { List<ChipviewtopUpItemModel> newList = List<ChipviewtopUpItemModel>.from(state.transactionsOneModelObj!.chipviewtopUpItemList); newList[event.index] = newList[event.index].copyWith(isSelected: event.isSelected); emit(state.copyWith(transactionsOneModelObj: state.transactionsOneModelObj?.copyWith(chipviewtopUpItemList: newList))); } 
+List<ChipviewtopUpItemModel> fillChipviewtopUpItemList() { return List.generate(3, (index) => ChipviewtopUpItemModel()); } 
+List<Usersubscriptio1ItemModel> fillUsersubscriptio1ItemList() { return List.generate(10, (index) => Usersubscriptio1ItemModel()); } 
+ }

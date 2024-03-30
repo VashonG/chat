@@ -1,0 +1,7 @@
+import 'package:equatable/equatable.dart';import 'package:flutter/material.dart';import '/core/app_export.dart';import '../models/chipviewgraph1l_item_model.dart';import 'package:carat_card/presentation/help_center_four_screen/models/help_center_four_model.dart';part 'help_center_four_event.dart';part 'help_center_four_state.dart';/// A bloc that manages the state of a HelpCenterFour according to the event that is dispatched to it.
+class HelpCenterFourBloc extends Bloc<HelpCenterFourEvent, HelpCenterFourState> {HelpCenterFourBloc(HelpCenterFourState initialState) : super(initialState) { on<HelpCenterFourInitialEvent>(_onInitialize); on<UpdateChipViewEvent>(_updateChipView); }
+
+_updateChipView(UpdateChipViewEvent event, Emitter<HelpCenterFourState> emit, ) { List<Chipviewgraph1lItemModel> newList = List<Chipviewgraph1lItemModel>.from(state.helpCenterFourModelObj!.chipviewgraph1lItemList); newList[event.index] = newList[event.index].copyWith(isSelected: event.isSelected); emit(state.copyWith(helpCenterFourModelObj: state.helpCenterFourModelObj?.copyWith(chipviewgraph1lItemList: newList))); } 
+List<Chipviewgraph1lItemModel> fillChipviewgraph1lItemList() { return List.generate(3, (index) => Chipviewgraph1lItemModel()); } 
+_onInitialize(HelpCenterFourInitialEvent event, Emitter<HelpCenterFourState> emit, ) async  { emit(state.copyWith(messageController: TextEditingController())); emit(state.copyWith(helpCenterFourModelObj: state.helpCenterFourModelObj?.copyWith(chipviewgraph1lItemList: fillChipviewgraph1lItemList()))); } 
+ }
